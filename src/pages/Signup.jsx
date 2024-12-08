@@ -25,8 +25,12 @@ const Signup = () => {
     }
     try {
       const response = await signUp({ email, password });
-      setErrorMessage(response?.response?.data?.message);
-      navigate("/login");
+      console.log("response", response);
+      if (response?.message === "User registered successfully") {
+        navigate("/login");
+      } else {
+        setErrorMessage(response?.response?.data?.message);
+      }
     } catch (error) {
       setErrorMessage(error.message || "Failed to register. Please try again.");
     }
